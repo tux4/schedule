@@ -1,0 +1,23 @@
+div(ng-include='"components/navbar/navbar.html"')
+
+header#banner.hero-unit
+  .container
+    h1 What are your services?
+    p.lead You can manage your services here.  
+    button.btn.btn-primary(ng-click="openNewServiceModal()") Add New Service
+
+
+.container
+  .row
+    .col-lg-12
+      h1.page-header Services
+      ul#services-list
+        li.col-md-4.col-lg-4.col-sm-6(ng-repeat='service in availableServices')
+          card-service(service-data='service')
+       
+footer.footer
+  .container
+    p
+      | Prasanna v2.0.13
+      = ' | '
+      a(href='https://github.com/tux4') @tux4

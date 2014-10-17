@@ -1,0 +1,31 @@
+div.modal-header 
+  h4 Add a New Service
+div.modal-body
+  div.form-horizontal(role='form')
+    div.form-group
+      label.col-sm-2.control-label Name
+      div.col-sm-10
+        input.form-control(type="text" ng-model='newService.name')
+    div.form-group
+      label.col-sm-2.control-label Description
+      div.col-sm-10
+        textarea.form-control(ng-model='newService.description')
+    div.form-group
+      label.col-sm-2.control-label Duration
+      div.col-sm-4.input-group
+        input.form-control(type="number" ng-model='newService.duration')
+        div.input-group-addon Minutes
+    div.form-group
+      label.col-sm-2.control-label Cost
+      div.col-sm-4.input-group
+        input.form-control(type="number" ng-model='newService.cost')
+        div.input-group-addon $
+    div.form-group
+      label.col-sm-2.control-label Transition
+      div.col-sm-4.input-group
+        input.form-control(type="number" ng-model='newService.transition')
+        div.input-group-addon Minutes
+.div.modal-footer
+  button.btn.btn-primary(ng-click='ok()') Add
+  button.btn.btn-danger(ng-click='cancel()') Cancel 
+

@@ -15,3 +15,14 @@ Client.find({}).remove(function() {
     phone : '949-236-43001',
   });
 });
+
+Service.find({}).remove(function() {
+  Service.create({
+    name : 'Massage',
+    description: '30 Minute Massage',
+    duration: 30,
+    cost: 35,
+	staff: 'Me',
+	transition: 15,
+  });
+});

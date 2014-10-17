@@ -1,0 +1,59 @@
+div.panel.panel-default(ng-show='!editMode')
+  div.panel-heading.clearfix
+    h3.panel-title.pull-left {{ serviceData.name }}
+    div.btn-group.pull-right
+      a.btn.btn-danger(ng-click="deleteService()") 
+        span.glyphicon.glyphicon-trash
+      a.btn.btn-primary.pull-right(ng-click="editService()") 
+        span.glyphicon.glyphicon-edit
+  div.list-group
+    div.list-group-item
+      p.list-group-item-text Description 
+      h4.list-group-item-heading
+        {{ serviceData.description }}
+    div.list-group-item
+      p.list-group-item-text Duration 
+      h4.list-group-item-heading
+        {{ serviceData.duration || 0 }} minutes
+    div.list-group-item
+      p.list-group-item-text Cost 
+      h4.list-group-item-heading
+        {{ serviceData.cost | currency }}
+    div.list-group-item
+      p.list-group-item-text Transition 
+      h4.list-group-item-heading
+        {{ serviceData.transition || 0 }} minutes
+
+div.panel.panel-default(ng-show='editMode')
+  div.panel-heading.clearfix
+    h3.panel-title.pull-left Edit {{ serviceData.name }}
+    div.btn-group.pull-right
+      a.btn.btn-danger(ng-click="cancelUpdate()")
+        span.glyphicon.glyphicon-remove
+      a.btn.btn-success(ng-click="updateService()")
+        span.glyphicon.glyphicon-ok
+
+  div.list-group
+    div.list-group-item
+      p.list-group-item-text Name 
+      input.form-control(content-editable ng-model='newServiceData.name')
+    div.list-group-item
+      p.list-group-item-text Description 
+      textarea.form-control(ng-model='newServiceData.description')
+    div.list-group-item
+      p.list-group-item-text Duration 
+      div.input-group
+        input.form-control(type="number" ng-model='newServiceData.duration')
+        span.input-group-addon Minutes
+    div.list-group-item
+      p.list-group-item-text Cost 
+      div.input-group
+        input.form-control(type="number" ng-model='newServiceData.cost')
+        span.input-group-addon $ 
+    div.list-group-item
+      p.list-group-item-text Transition 
+      div.input-group
+        input.form-control(type="number" ng-model='newServiceData.transition')
+        span.input-group-addon Minutes
+
+    

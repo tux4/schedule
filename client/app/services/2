@@ -1,0 +1,25 @@
+div.modal-header Add a New Service
+div.modal-body.panel.panel-default
+  div.panel-heading.clearfix
+      i.fa.fa-check
+  div.list-group
+    div.list-group-item
+      p.list-group-item-text Description 
+      h4.list-group-item-heading
+        {{ serviceData.description }}
+    div.list-group-item
+      p.list-group-item-text Duration 
+      h4.list-group-item-heading
+        {{ serviceData.duration || 0 }} minutes
+    div.list-group-item
+      p.list-group-item-text Cost 
+      h4.list-group-item-heading
+        {{ serviceData.cost | currency }}
+    div.list-group-item
+      p.list-group-item-text Transition 
+      h4.list-group-item-heading
+        {{ serviceData.transition || 0 }} minutes
+.div.modal-footer
+  button.btn.btn-primary Add
+  button.btn.btn-danger Cancel 
+
