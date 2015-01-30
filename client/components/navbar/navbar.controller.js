@@ -3,13 +3,21 @@
 angular.module('scheduleApp')
   .controller('NavbarCtrl', function ($scope, $location) {
     $scope.menu = [{
-      'title': 'Home',
+      'title': 'Dashboard',
       'link': '/'
+    },
+	{
+      'title': 'Calendar',
+      'link': '/calendar'
     },
 	{
       'title': 'Services',
       'link': '/services'
-    }
+    },
+	{
+      'title': 'Clients',
+      'link': '/clients'
+    },
 	];
 
     $scope.isCollapsed = true;

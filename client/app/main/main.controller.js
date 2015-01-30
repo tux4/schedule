@@ -2,24 +2,16 @@
 
 angular.module('scheduleApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+    $scope.upComingEvents = [];
 
-    $http.get('/api/clients').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('client', $scope.awesomeThings);
-    });
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/clients', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(client) {
-      $http.delete('/api/clients/' + client._id);
-    };
+    $http({
+		url:'/api/events', 
+		method:"GET", 
+		params:{ "start": moment.utc().format("YYYY-MM-DDTHH:mm:ss") }
+	}).success(function(upComingEvents) {
+		$scope.upComingEvents = upComingEvents;
+		socket.syncUpdates('client', $scope.upComingEvents);
+	});
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('client');

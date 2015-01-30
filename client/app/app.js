@@ -6,7 +6,8 @@ angular.module('scheduleApp', [
   'ngSanitize',
   'ngRoute',
   'btford.socket-io',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ui.calendar',
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

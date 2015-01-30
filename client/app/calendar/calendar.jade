@@ -1,0 +1,14 @@
+div(ng-include='"components/navbar/navbar.html"')
+
+.container
+  .row
+    .col-lg-12
+      h1.page-header Calendar
+      div(ui-calendar='uiConfig.calendar', ng-model='eventSources')       
+
+footer.footer
+  .container
+    p
+      | Prasanna v2.0.13
+      = ' | '
+      a(href='https://github.com/tux4') @tux4

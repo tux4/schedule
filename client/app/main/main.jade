@@ -3,26 +3,24 @@ div(ng-include='"components/navbar/navbar.html"')
 header#banner.hero-unit
   .container
     h1 schedule 
-    p.lead Schedule Your Appointment Here 
-    img(src='assets/images/resolution.png', alt='schedule')
+    img(src='assets/images/schedule.png', alt='schedule')
 
 .container
   .row
     .col-lg-12
-      h1.page-header Features:
-      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='client in awesomeThings')
-        li
-          a(href='#', tooltip='{{client.info}}')
-            | {{client.name}}
-            button.close(type='button', ng-click='deleteThing(client)') ×
-
-  form.client-form
-    label Syncs in realtime across clients
-    p.input-group
-      input.form-control(type='text', placeholder='Add a new client here.', ng-model='newThing')
-      span.input-group-btn
-        button.btn.btn-primary(type='submit', ng-click='addThing()') Add New
-
+      h1.page-header Upcomming Events:
+      div.bootcards-list
+        div.panel.panel-default
+          div.list-group(ng-repeat='event in upComingEvents')
+            a.list-group-item(ng-switch='event.type')
+              img.img-rounded.pull-left(ng-switch-when='event', src='assets/images/ico-appointment.png')
+              img.img-rounded.pull-left(ng-switch-when='appointment' src='assets/images/ico-client.png')
+              h4.list-group-item-heading {{ event.title }}
+              p.list-group-item-text {{ event.start | calendar }}
+              div(ng-switch-when="appointment")
+                {{ event.service.description }}
+              div(ng-if="event.allDay")
+                p ( This is a day long event )
 footer.footer
   .container
     p

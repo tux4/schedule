@@ -1,0 +1,110 @@
+div.modal-header(ng-switch='modalTask')
+  h4(ng-switch-when='new') New Event
+  h4(ng-switch-when='edit') Update Event
+div.modal-body
+  div.form-horizontal(role='form', ng-switch='newEvent.type')
+    div.form-group(ng-if='modalTask==="new"')
+      label.col-sm-2.control-label Type
+      div.btn-group
+        label.btn.btn-primary(ng-model='newEvent.type', btn-radio="'event'") Event
+        label.btn.btn-primary(ng-model='newEvent.type', btn-radio="'appointment'") Appointment
+    div.form-group(ng-switch-when='event')
+      label.col-sm-2.control-label Title
+      div.col-sm-10
+        input.form-control(
+          placeholder="What's the event?"
+          type="text" 
+		  ng-model='newEvent.title'
+        )
+
+    div.form-group(ng-switch-when='appointment')
+      label.col-sm-2.control-label Client
+      div.col-sm-10
+        input.form-control(
+          placeholder="Full Name"
+          type="text" 
+		  ng-model='newEvent.client'
+		  ng-change='clientModelFormat($model)',
+          typeahead='client as client.name for client in allClients | filter:$viewValue | limitTo:8'
+          typeahead-editable=true
+        )
+        div.row.help-block
+          div.col-sm-5
+            input.form-control(placeholder='E-mail', ng-model='newEvent.client.email')
+          div.col-sm-5
+            input.form-control(placeholder='Phone', ng-model='newEvent.client.phone')
+
+    div.form-group(ng-switch-when='appointment')
+      label.col-sm-2.control-label Service
+      div.col-sm-10
+        select.form-control(
+          ng-model='newEvent.service', 
+          ng-options='service as service.name for service in allServices'
+        )
+        div(ng-if="newEvent.service")
+          p.help-block
+            {{ newEvent.service.description }} ({{ newEvent.service.cost | currency }})
+    div.form-group
+      label.col-sm-2.control-label Start
+      div.row
+        div.dropdown.col-sm-4
+          a#dropdown-startdate.dropdown-toggle(toggle='startDateToggle')
+            div.input-group
+              input.form-control(type='text', ng-model='newEvent.start')
+              span.input-group-addon
+                i.glyphicon.glyphicon-calendar
+          div.dropdown-menu(role='menu', aria-labelledby='dLabel')
+            datepicker(
+              type='text'
+              ng-model="newEvent.start"
+              show-weeks="true"
+              close-on-date-selection=false
+            )    
+            div.row
+              span.col-sm-3
+              span.col-sm-5
+                timepicker(ng-model='newEvent.start')
+
+    div.form-group(ng-switch-when='event')
+      label.col-sm-2.control-label End
+      div.row
+        div.dropdown.col-sm-4
+          a#dropdown-startdate.dropdown-toggle(toggle='endDateToggle')
+            div.input-group
+              input.form-control(type='text', ng-model='newEvent.end')
+              span.input-group-addon
+                i.glyphicon.glyphicon-calendar
+          ul.dropdown-menu(role='menu', aria-labelledby='dLabel')
+            datepicker(
+              type='text'
+              ng-model="newEvent.end"
+              show-weeks="true"
+            )    
+            div.row
+              span.col-sm-3
+              span.col-sm-5
+                timepicker(ng-model='newEvent.end')
+    div.form-group
+      label.col-sm-2.control-label All Day
+      div.col-sm-5
+        input(type="checkbox", ng-model="newEvent.allDay")
+        | Day Long Event
+    div.form-group(ng-if='newEvent.service', ng-switch-when='appointment')
+      label.col-sm-2.control-label Duration
+      div.col-sm-4
+        p.help-block {{ newEvent.service.duration }} minutes, with {{ newEvent.service.transition }} minutes of transition.
+    div.form-group
+      label.col-sm-2.control-label Comment
+      div.col-sm-10
+        textarea.form-control(placeholder="Additional Comments (Optional)" ng-model='newEvent.comment')
+
+.div.modal-footer(ng-switch='modalTask')
+  .div(ng-switch-when='new')
+    button.btn.btn-success(ng-click='ok()') Create
+    button.btn.btn-danger(ng-click='cancel()') Cancel 
+  .div(ng-switch-when='edit')
+    button.btn.btn-success(ng-click='update()') Update
+    button.btn.btn-danger(ng-click='delete()') Delete
+    button.btn.btn-primary(ng-click='cancel()') Cancel 
+
+
